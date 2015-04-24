@@ -1,0 +1,25 @@
+{
+  "name": "Professional-JavaScript-For-WebDevelopers",
+  "version": "0.0.0",
+  "homepage": "https://github.com/zhangmingkai4315/Professional-JavaScript-For-WebDevelopers",
+  "authors": [
+    "zhangmingkai4315 <zhangmingkai19892013@gmail.com>"
+  ],
+  "keywords": [
+    "JavaScript",
+    "Professional-JavaScript-For-WebDevelopers"
+  ],
+  "license": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "angular": "~1.3.15",
+    "semantic": "~1.12.0"
+  }
+}
