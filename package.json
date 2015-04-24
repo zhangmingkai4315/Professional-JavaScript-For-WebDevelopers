@@ -1,0 +1,22 @@
+{
+  "name": "Professional-JavaScript-For-WebDevelopers",
+  "version": "1.0.0",
+  "description": "Source Code of Professional-JavaScript-For-WebDevelopers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhangmingkai4315/Professional-JavaScript-For-WebDevelopers.git"
+  },
+  "keywords": [
+    "JavaScript"
+  ],
+  "author": "mingkai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhangmingkai4315/Professional-JavaScript-For-WebDevelopers/issues"
+  },
+  "homepage": "https://github.com/zhangmingkai4315/Professional-JavaScript-For-WebDevelopers"
+}
