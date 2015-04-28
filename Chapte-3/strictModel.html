@@ -1,0 +1,92 @@
+<<!DOCTYPE html>
+<html>
+<head>
+	<title>StrictModel</title>
+	<script type="text/javascript">
+// 	// 使用限制模式影响编码的要求
+// 	'use strict';
+// 	// testStrict="throw error under strict mode";
+
+// // 　　var o = Object.create(null, {'x': {
+// // 　　　　　　value: 1,
+// // 　　　　　　configurable: true
+// // 　　}});
+
+// // 　　delete o.x; // 删除成功
+
+// 	// var obj = {};
+// 	// Object.defineProperties(obj, {
+// 	//   "property1": {
+// 	//     value: true,
+// 	//     writable: true
+// 	//   },
+// 	//   "property2": {
+// 	//     value: "Hello",
+// 	//     writable: false
+// 	//   }});
+
+// 	// obj.property2=10;
+
+// 	var test='hello';
+// 	var Test='world';
+// 	var doSomeThing=function(){
+// 		return test;
+// 	}
+// 	console.log(this);
+
+	</script>
+	<script type="text/javascript">
+	var test;
+	console.log(typeof test);
+	test=null;
+	console.log(typeof test);
+	test=false;
+	console.log(typeof test);
+	test=10;
+	console.log(typeof test);
+	test=function(){
+
+	};
+	console.log(typeof test);
+	test="hello";
+	console.log(typeof test);
+
+
+	console.log(null==undefined)
+
+	console.log(Number.MAX_VALUE);
+	console.log(Number.MIN_VALUE);
+
+	// 精度问题导致无法相等
+	var a=0.1,b=0.2;
+	console.log((a+b)==0.3);
+
+	console.log(NaN==NaN)
+    //只要整个里面包含非法字符则返回NaN
+	console.log(Number("1109hello"));
+	//解析开头到最终符合要求的数字
+	console.log(parseInt("hello1109"));
+	console.log(parseInt("1109hello"));
+	console.log(parseInt("1101hello",2));
+
+	//parseFloat忽略前面的0
+	console.log(parseFloat("0xa"));
+	console.log(parseInt("0xa"));
+
+
+
+
+	console.log(Number("10").toString(2));
+	</script>
+
+
+
+
+
+
+
+</head>
+<body>
+
+</body>
+</html>
