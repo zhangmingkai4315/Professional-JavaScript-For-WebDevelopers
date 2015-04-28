@@ -1,0 +1,32 @@
+1. 引入外部的时候<script type="text/javascript"></script>
+	type="text/javascript"为默认的属性，服务器一般的MIME类型为application/x-javascript
+
+	defer:当设置此值后，只有当文档全部展示完毕后才加载数据
+	async:当设置此值后，异步加载外部的文档，不妨碍其他页面的加载
+
+	因为defer属性默认是为false的，那么在这里
+
+	<script language="javascript" defer>
+	显式声明defer属性后等同于
+
+	<script language="javascript" defer=true>
+
+	嵌入的脚本无法使用此标签，使用作为外部脚本引入时，不会影响其他页面的构造 。
+	对于async的脚本，不能保证执行顺序，谁先载入完毕就执行谁
+
+	带有async或者defer的script都会立刻下载并不阻塞页面解析它的不同之处在于async一旦下载完成就立即执行（在window.onload事件之前），不确保执行的顺序，而defer能确保js是在按照其在页面中的顺序执行（在DOMContentLoaded事件之前）。 
+
+2. 使用外部的文件优点：
+	同一个文件不需要再多个页面中重复载入
+	不需要分辨HTML和XHTML的区别
+	分开放置将利于文件的调试 
+
+3.<!doctype html>
+
+	DOCTYPE是Document Type（文档类型）的简写，在页面中，用来指定页面所使用的XHTML（或者HTML）的版本。要想制作符合标准的页面，一个必不可少的关键组成部分就是DOCTYPE声明。只有确定了一个正确的DOCTYPE，XHTML里的标识和CSS才能正常生效。
+
+	在 HTML 4.01 中，<!DOCTYPE> 声明引用 DTD，因为 HTML 4.01 基于 SGML。
+	DTD 规定了标记语言的规则，这样浏览器才能正确地呈现内容。
+	HTML5 不基于 SGML，所以不需要引用 DTD。
+
+4 对于不支持javascript的浏览器中 使用<noscript>进行标记
