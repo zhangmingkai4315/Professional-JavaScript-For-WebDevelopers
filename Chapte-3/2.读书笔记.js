@@ -52,3 +52,14 @@ switch(true){
 }
 
 
+
+4. 	function argu(){alert(arguments.length);}
+	argu("hello",2);
+	argu("hello");
+
+	// arguments 数组保存所有的参数值
+	// 严格模式下 拒绝重写参数
+	// 函数没有重载机制 新函数覆盖旧的函数定义，可重复定义
+
+	
+

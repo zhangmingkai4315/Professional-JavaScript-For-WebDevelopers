@@ -18,3 +18,4 @@ function setName(obj){
 var person=new Object();
 setName(person);
 person.name;
+
