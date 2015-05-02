@@ -22,7 +22,8 @@ alert(data);
 
 
 
-2. function factoria(num){
+// 2. 
+function factoria(num){
 	if(num<=1){
 		return 1;
 	}else{
@@ -30,11 +31,11 @@ alert(data);
 	}
 }
 
-如何解耦此函数让不同的对象可以指向并运行 不具有模糊性
+// 如何解耦此函数让不同的对象可以指向并运行 不具有模糊性
 
-比如 var otherFunc=factoria;
+// 比如 var otherFunc=factoria;
 
-otherFunc(19); 
+// otherFunc(19); 
 
 function factoria(num){
 	if(num<=1){
@@ -43,3 +44,6 @@ function factoria(num){
 		return num*arguments.callee(num-1);
 	}
 }
+
+factoria.length;
+

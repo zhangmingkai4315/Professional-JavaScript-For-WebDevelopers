@@ -107,9 +107,14 @@ encodeURIComponent(httpUrl);
 "http%3A%2F%2Fwww.baidu.com%2Fhello%20world.html"
 
 
-13. eval 与执行环境
+13. eval 与执行环境息息相关。
 
 var msg="hello";
 
 eval("alert(msg)");
 
+13. 不要使用Boolean对象创建boolean类型 
+
+比如 当使用 var falseObject=new Boolean(false);
+falseObject&&true
+// true 因为所有的对象在转换为boolean时均未true

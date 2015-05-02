@@ -60,3 +60,54 @@ var correctSorted=number.sort(function(val1,val2){
 });
 
 console.log(correctSorted);
+
+
+// 5. concat()  slice() splice()
+
+var concat1=colors.concat(["hello","world"]);
+colors=["yellow", "green", "blue"]
+colors.slice(0,2);
+// ["yellow", "green"]
+//包含【0，2）范围的数组
+
+// 开始位置追加
+colors.splice(0,0,"black","grey"); 
+
+// 6. every(callback)  some(callback) map(callback) filter(callback) .forEach
+
+var numbers=[1,2,3,4,5,4,3,2,1];
+
+var everyResult=numbers.every(function(item){return item>2;});
+var someResult=numbers.some(function(item){return item>2;})
+var mapResult=numbers.map(function(item){return item*2;})
+var filterResult=numbers.filter(function(item){
+	return item>2;
+});
+
+var forEachResult=numbers.forEach(function(item){
+	console.log(item);
+})
+
+// everyResult
+// false
+// someResult
+// true
+// filterResult
+// [3, 4, 5, 4, 3]
+// mapResult
+// [2, 4, 6, 8, 10, 8, 6, 4, 2]
+
+
+// 7. reduce函数
+
+var reduceResult=numbers.reduce(function(pre,cur,index,array){
+	return pre+cur;
+});
+
+
+//注意一定要0-11代表 1月到12月
+var data=new Date(2010,0,1);
+data.toLocaleDateString();
+// "2010/1/1"
+data.toUTCString();
+// "Thu, 31 Dec 2009 16:00:00 GMT"
