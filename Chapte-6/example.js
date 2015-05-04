@@ -46,7 +46,7 @@ function Person(name,age,job){
 
 var person3=new Person("Nike",23,"SE");
 var person4=new Person("Mike",32,"Doctor");
-
+// 每次都重新创建了函数及声明
 
 // 构造函数改进版
 function Person(name,age,job){
@@ -78,7 +78,7 @@ person.prototype.sayName={
 //如何判断一个函数是在原型系统还是自定义系统
 
 //  hasOwnProperty(property) 
-//  property in person1  
+//  property in person1  in 包含所有的继承属性
 //  只存在于原型而不是被覆盖
 function hasPrototypeProperty(object,name){
 	return !object.hasOwnProperty(name)&&(name in object);

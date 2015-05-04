@@ -52,12 +52,12 @@ alert(object.getNameFunc()());   //my object
 			console.log('i='+i);
 		}
 	})();
-	alert(i);
+	alert(i);  //隔离开了
 }
 
-4. 静态对象
+// 4. 静态对象 ,闭包实现静态
 
-（function(){
+(function(){
 	var staticName="";
 	Person=function(value){
 		staticName=value;
@@ -75,3 +75,23 @@ var person2=new Person("Cale");
 
 person1.setName("nill");
 person2.getName();
+
+
+// 5. 单例模式：
+
+var application=function(){
+	var components=new Array();
+	components.push(new BaseComponent());
+	return {
+		getComponentCount:function(){
+			return components.length;
+		},
+		registerComponent:function(component){
+			if(typeof component=="object"){
+				components.push(component);
+			}
+		}
+
+	};
+}();
+
