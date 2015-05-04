@@ -124,3 +124,33 @@ Person.prototype={
 };
 
 friend.sayName();
+
+
+3. 原型与继承：
+
+function SuperType(){
+	this.property=true;
+}
+SuperType.prototype.getSuperValue=function(){
+	return this.property;
+}
+function SubType(){
+
+}
+
+//重写了SubType的原型函数，并将其指向了SuperType的类型
+//实现了继承
+SubType.prototype=new SuperType();
+SubType.prototype.getSubValue=function(){
+	return !this.property;
+}
+
+
+var instance1=new SubType();
+instance1.getSubValue();
+
+
+实例中 其实所有的原型都是默认会指向new Object(),而如果你更改了一个新的对象实例则会变更形成一个原型的继承链
+默认的都会使用isPrototype hasOwnProperty() toString toLocalString()这些Object()对象的方法
+
+
