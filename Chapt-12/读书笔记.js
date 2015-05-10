@@ -73,3 +73,35 @@ while(node!==null){
 	alert(node.tagName);
 	node=iterator1.nextNode();
 }
+
+
+6. range
+
+range选择=合适的范围并删除 但保留原来的html结构
+比如<p id="p1"><b>Hello</b>world</p>
+
+
+p1=document.getElementById("p1");
+
+hellonode=p1.firstChild.firstChild
+
+hellonode=p1.firstChild.firstChild
+
+worldnode=p1.lastChild
+
+range=document.createRange();
+Range {commonAncestorContainer: document, collapsed: true, endOffset: 0, endContainer: document, startOffset: 0…}
+range.setStart(hellonode,2);
+
+range.setEnd(worldnode,2);
+
+range.deleteContents();
+
+<p id="p1"><b>He</b>rld</p>
+带结构复制 也是一个较为常见的功能 
+复制的时候带着元素的属性一起
+
+range.cloneContents();
+range.cloneRange();
+range.detach()
+range=null;
