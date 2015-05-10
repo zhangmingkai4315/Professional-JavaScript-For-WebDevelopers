@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<ul id="myul">
+	<li id="myli_1">hello</li>
+	<li id="myli_2">world</li>
+</ul>
+<input id="myinput"/>
+
+<script type="text/javascript"> 
+//原始的方式
+var myli_1=document.getElementById("myli_1");
+var myli_2=document.getElementById("myli_2");
+var myul=document.getElementById("myul");
+
+var myinput=document.getElementById("myinput");
+var event=document.createEvent("Events");
+event.initEvent("keypress",true,true);
+event.view=document.defaultView;
+event.altKey=false;
+event.ctrlKey=false;
+event.shiftKey=false;
+event.metaKey=false;
+event.keyCode=65;
+
+myinput.dispatchEvent(event);
+
+
+// myli_1.addEventListener("click",function(){
+// 	alert("myli_1");
+// },false);
+
+// myli_2.addEventListener("click",function(){
+// 	alert("myli_2");
+// },false);
+
+myul.addEventListener("click",function(event){
+	switch(event.target.id){
+		case "myli_1":
+			alert("myli_1");
+			break;
+		case "myli_2":
+			alert("myli_2");
+			break;
+		default:
+			alert("nothing");
+			break;
+	}
+});
+
+
+
+</script>
+</body>
+</html>

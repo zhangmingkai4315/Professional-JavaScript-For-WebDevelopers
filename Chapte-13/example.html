@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+</head>
+<body>
+<!-- <div id="click" onclick="showMe()">Click me</div> -->
+<button id="myclick">Click me</button>
+<div id="div1">
+	<div id="div2">
+		Hello world
+	</div>
+
+</div>	
+
+<input type="text" id="myinput"/>
+
+	<script type="text/javascript">
+
+	 // function showMe(){
+	 // 	alert("Me");
+	 // }
+	 // var btn_click=document.getElementById("myclick");
+	 // btn_click.onclick=function(){
+	 // 	alert("my id is "+this.id);
+	 // };
+
+	 // btn_click.addEventListener("click",function(){
+	 // 	alert("ADD EVENT");
+	 // },false);
+   	 
+	 // var EventUtil={
+	 // 	addHandler:function(element,type,handler){
+	 // 		if(element.addEventListener){
+	 // 			element.addEventListener(type,handler,false);
+	 // 		}else if(element.attachEvent){
+	 // 			element.attachEvent("on"+type);
+	 // 		}else{
+	 // 			element["on"+type]=handler;
+	 // 		}
+	 // 	}
+	 // 	removeHandler:function(element,type,handler){
+	 // 		if(element.removeEventListener){
+	 // 			element.removeEventListener(type,handler,false);
+	 // 		}else if(element.detachEvent){
+	 // 			element.detachEvent("on"+type);
+	 // 		}else{
+	 // 			element["on"+type]=null;
+	 // 		}
+	 // 	}
+	 	
+	 // };
+    var EventUtil={
+    	getEvent:function(event){
+    		return event?event:window.event;
+    	},
+    	getTarget:function(event){
+    		return event.target||event.srcElement;
+    	},
+	 	addHandler:function(element,type,handler){
+	 		if(element.addEventListener){
+	 			element.addEventListener(type,handler,false);
+	 		}else if(element.attachEvent){
+	 			element.attachEvent("on"+type);
+	 		}else{
+	 			element["on"+type]=handler;
+	 		}
+	 	},
+	 	removeHandler:function(element,type,handler){
+	 		if(element.removeEventListener){
+	 			element.removeEventListener(type,handler,false);
+	 		}else if(element.detachEvent){
+	 			element.detachEvent("on"+type);
+	 		}else{
+	 			element["on"+type]=null;
+	 		}
+	 	},
+	 	preventDefault:function(event){
+			if(event.preventDefault){
+				event.preventDefault();
+			}else{
+				event.returnValue=false;   //returnValue代表了阻止默认行为
+			}
+		},
+
+		stopPropagation:function(event){
+			if(event.stopPropagation){
+				event.stopPropagation();
+			}else{
+				event.cancelBubble=true;   //cancelBubble 代表了阻止事件冒泡
+			}
+		},
+		//定义鼠标滚轮的事件 若是向前则返回120 向后返回-120 
+		getWheelDelta:function(event){
+			if(event.wheelDelta){
+				return event.wheelDelta;
+			}else{
+				return -event.detail*40;  //定义了Firefox的支持i
+			}
+		},
+		getCharCode:function(event){
+			console.log(event.charCode);console.log(event.keyCode);
+
+			if(typeof event.charCode=="number"){
+				return event.charCode;
+			}else{
+				return event.keyCode;
+			}
+		}
+	 	
+	 };
+
+    
+
+    // var div1=document.getElementById("div1");
+    // var div2=document.getElementById("div2");
+    
+    // div1.addEventListener("click",function(){
+    // 	alert("div1");
+    // },false);
+    // div2.addEventListener("click",function(event){
+    // 	alert("div2");
+    // 	event=EventUtil.getEvent(event);
+    // 	EventUtil.stopPropagation(event);
+    // },false);
+     
+    // EventUtil.addHandler(window,"load",function(){
+    // 	var script=document.createElement("script");
+    // 	EventUtil.addHandler(script,"load",function(event){
+    // 		alert("loaded");
+    // 	});
+    // 	script.src="example.js";
+    // 	document.body.appendChild(script);	
+    // });
+
+    // EventUtil.addHandler(window,"click",function(event){
+    // 	event=EventUtil.getEvent(event);
+    // 	var pageX=event.pageX;
+    // 	var pageY=event.pageY;
+
+    // 	if(pageX==undefined){
+    // 		pageX=event.clientX+(document.body.scrollLeft||document.documentElement.scrollLeft);
+    // 	}
+    // 	if(pageY==undefined){
+    // 		pageY=event.clientY+(document.body.scrollTop||document.documentElement.scrollTop);
+    // 	}
+
+    // 	if(event.shiftKey){
+    // 		alert("press shiftKey");   //支持同时按下shift和 click的按键
+    // 	}
+    // 	alert(pageX+":"+pageY);
+    // });
+
+    var textBox=document.getElementById("myinput");
+    EventUtil.addHandler(textBox,"keyup",function(event){
+    	event=EventUtil.getEvent(event);
+
+    	alert(EventUtil.getCharCode(event));
+    })
+    EventUtil.addHandler(window,"mousewheel",function(event){
+    	event=EventUtil.getEvent(event);
+    	alert(event.wheelDelta);
+    });
+
+	</script>
+</body>
+</html>
