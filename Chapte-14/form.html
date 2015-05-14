@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Form</title>
+</head>
+<body>
+<form action="/" method="post">
+	<label>UserName</label><input type="text" value="username" name="username" autofocus required>
+	<label>Password</label><input type="password" value="password" pattern="\d+" name="password">
+	<select id="selectbox">
+		<option value="111">222</option>
+		<option value="111">222</option>
+	</select>
+	<input type="submit">
+</form>
+
+<script type="text/javascript">
+	var EventUtil={
+    	getEvent:function(event){
+    		return event?event:window.event;
+    	},
+    	getTarget:function(event){
+    		return event.target||event.srcElement;
+    	},
+	 	addHandler:function(element,type,handler){
+	 		if(element.addEventListener){
+	 			element.addEventListener(type,handler,false);
+	 		}else if(element.attachEvent){
+	 			element.attachEvent("on"+type);
+	 		}else{
+	 			element["on"+type]=handler;
+	 		}
+	 	},
+	 	removeHandler:function(element,type,handler){
+	 		if(element.removeEventListener){
+	 			element.removeEventListener(type,handler,false);
+	 		}else if(element.detachEvent){
+	 			element.detachEvent("on"+type);
+	 		}else{
+	 			element["on"+type]=null;
+	 		}
+	 	},
+	 	preventDefault:function(event){
+			if(event.preventDefault){
+				event.preventDefault();
+			}else{
+				event.returnValue=false;   //returnValue代表了阻止默认行为
+			}
+		},
+
+		stopPropagation:function(event){
+			if(event.stopPropagation){
+				event.stopPropagation();
+			}else{
+				event.cancelBubble=true;   //cancelBubble 代表了阻止事件冒泡
+			}
+		},
+		//定义鼠标滚轮的事件 若是向前则返回120 向后返回-120 
+		getWheelDelta:function(event){
+			if(event.wheelDelta){
+				return event.wheelDelta;
+			}else{
+				return -event.detail*40;  //定义了Firefox的支持i
+			}
+		},
+		getCharCode:function(event){
+			console.log(event.charCode);
+			console.log(event.keyCode);
+
+			if(typeof event.charCode=="number"){
+				return event.charCode;
+			}else{
+				return event.keyCode;
+			}
+		}
+	 	
+	 };
+
+
+	var textBox=document.forms[0].elements[0];
+	EventUtil.addHandler(textBox,"focus",function(event){
+		event=EventUtil.getEvent(event);
+		var target=EventUtil.getTarget(event);
+		if(target.style.backgroundColor!=="red"){
+			target.style.backgroundColor="yellow"
+		}
+	});
+
+	EventUtil.addHandler(textBox,"blur",function(event){
+		event=EventUtil.getEvent(event);
+		var target=EventUtil.getTarget(event);
+		if(/[^\d]/.test(target.value)){
+			target.style.backgroundColor="red";
+		}else{
+			target.style.backgroundColor="";
+		}
+	});
+
+
+	EventUtil.addHandler(textBox,"change",function(event){
+		
+		event=EventUtil.getEvent(event);
+		var target=EventUtil.getTarget(event);
+		if(/[^\d]/.test(target.value)){
+			target.style.backgroundColor="green";
+		}else{
+			target.style.backgroundColor="grey";
+		}
+	});
+
+	EventUtil.addHandler(textBox,"keypress",function(event){
+		event=EventUtil.getEvent(event);
+		var target=EventUtil.getTarget(event);
+
+		var charCode=EventUtil.getCharCode(event);
+
+		if(!/\d/.test(String.fromCharCode(charCode))&&charCode>9&&!event.ctrlKey){
+			EventUtil.preventDefault(event);
+		}
+
+	});
+    var selectbox=document.getElementById("selectbox");
+	var newOption=new Option("OPTION TEXT","OPTION VALUE");
+	selectbox.add(newOption,undefined);
+
+
+
+
+</script>
+</body>
+</html>
