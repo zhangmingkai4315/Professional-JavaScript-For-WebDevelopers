@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+	var person={
+		name:"Mike",
+		age:21,
+		school:{
+			name:"DC",
+			location:"Chicgo"
+		}
+	}
+
+	var jsonText=JSON.stringify(person)
+	console.log(jsonText);
+
+	var person1=JSON.parse(jsonText)
+	console.log(person1);
+
+
+    // filter function 
+	jsonText=JSON.stringify(person,["name","age"])
+	console.log(jsonText);
+
+	person1=JSON.parse(jsonText)
+	console.log(person1);
+
+    // function
+    jsonText=JSON.stringify(person,function(key,value){
+    	switch(key){
+    		case "name":
+    			return "my name is "+value;
+    			
+    		default :
+    			return value
+    			
+    	}
+    });
+	console.log(jsonText);
+
+	person1=JSON.parse(jsonText)
+	console.log(person1);
+
+    jsonText=JSON.stringify(person,null,4)
+	console.log(jsonText);
+
+	person1=JSON.parse(jsonText)
+
+
+
+	console.log(person1);
+
+
+  //作为解析函数也有function处理器
+	var person={
+		name:"Mike",
+		age:21,
+		school:{
+			name:"DC",
+			location:"Chicgo"
+		},
+		DateNow:new Date(2015,1,1)
+	}
+	 jsonText=JSON.stringify(person,null,4)
+	console.log(jsonText);
+
+	person1=JSON.parse(jsonText,function(k,v){
+		if(k=="DateNow")
+			return new Date(v);
+		else
+			return v;
+	})
+
+	console.log(person1);
+
+	</script>
+
+
+
+</head>
+
+
+<body>
+
+</body>
+</html>
