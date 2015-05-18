@@ -63,4 +63,16 @@ var person={
 		}
 	}
 
-var jsonText=JSON.stringify(person)
+	var jsonText=JSON.stringify(person)
+	console.log(jsonText);
+
+	var person1=JSON.parse(jsonText)
+	console.log(person1);
+
+
+stringify的高级用法:
+
+1. 过滤器
+
+
+
