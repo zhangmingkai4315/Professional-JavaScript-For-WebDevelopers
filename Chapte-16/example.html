@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Drag Things</title>
+	<script type="text/javascript">
+
+	var EventUtil={
+    	getEvent:function(event){
+    		return event?event:window.event;
+    	},
+    	getTarget:function(event){
+    		return event.target||event.srcElement;
+    	},
+	 	addHandler:function(element,type,handler){
+	 		if(element.addEventListener){
+	 			element.addEventListener(type,handler,false);
+	 		}else if(element.attachEvent){
+	 			element.attachEvent("on"+type);
+	 		}else{
+	 			element["on"+type]=handler;
+	 		}
+	 	},
+	 	removeHandler:function(element,type,handler){
+	 		if(element.removeEventListener){
+	 			element.removeEventListener(type,handler,false);
+	 		}else if(element.detachEvent){
+	 			element.detachEvent("on"+type);
+	 		}else{
+	 			element["on"+type]=null;
+	 		}
+	 	},
+	 	preventDefault:function(event){
+			if(event.preventDefault){
+				event.preventDefault();
+			}else{
+				event.returnValue=false;   //returnValue代表了阻止默认行为
+			}
+		},
+
+		stopPropagation:function(event){
+			if(event.stopPropagation){
+				event.stopPropagation();
+			}else{
+				event.cancelBubble=true;   //cancelBubble 代表了阻止事件冒泡
+			}
+		},
+		//定义鼠标滚轮的事件 若是向前则返回120 向后返回-120 
+		getWheelDelta:function(event){
+			if(event.wheelDelta){
+				return event.wheelDelta;
+			}else{
+				return -event.detail*40;  //定义了Firefox的支持i
+			}
+		},
+		getCharCode:function(event){
+			console.log(event.charCode);
+			console.log(event.keyCode);
+
+			if(typeof event.charCode=="number"){
+				return event.charCode;
+			}else{
+				return event.keyCode;
+			}
+		}
+	 	
+	 };
+	 var dropTarge=document.getElementById("dropTarge");
+	 EventUtil.addHandler(dropTarge,"dragover",function(event){
+	 	EventUtil.preventDefault(event);
+	 });
+	  EventUtil.addHandler(dropTarge,"dragenter",function(event){
+	 	EventUtil.preventDefault(event);
+	 });
+
+	  var helloBtn=document.getElementById("helloBtn");
+
+	 //   EventUtil.addHandler(dropTarge,"dragstart",function(event){
+	 // 	EventUtil.preventDefault(event);
+	 // });
+	 //  EventUtil.addHandler(dropTarge,"drag",function(event){
+	 // 	EventUtil.preventDefault(event);
+	 // });
+	</script>
+</head>
+<body>
+<div id="dropTarget" style="width: 100px;height: 100px;background-color: green">
+	
+</div>
+
+<button id="helloBtn" draggable="true">Hello</button>
+<!-- <textarea></textarea> -->
+</body>
+</html>
