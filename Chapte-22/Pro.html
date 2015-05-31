@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+	var Person=function(){
+		this.name="Mike";
+		this.age=23;
+		this.showMe=function(){
+			console.log(this.name+" "+this.age);
+		}
+	};
+
+	var p1=new Person();
+	p1.showMe();
+	console.log(window.name);
+     //如果不使用new 方法创建person对象的话，则将window对象绑定到this上 因此会产生很多问题
+	// var p2=Person();
+	// // p2.showMe();
+	// console.log(window.name);
+
+
+
+	//避免在全局作用域下创建内容,但是对于使用了call方法的显式调用其他对象范围的则要小心使用，避免无法访问的情况出现 可以使用原型的继承链 将其prototype绑定后在调用 
+	var ProPerson=function(name,age){
+		if(this instanceof ProPerson){
+			this.name=name;
+			this.age=age;
+		}else{
+			return new ProPerson(name,age);
+		}
+	}
+
+	var pp1=ProPerson("lic",22);
+	console.log(window.name);
+
+
+
+	// 函数绑定
+	var hander={
+		message:"Event HANDELR",
+		handleClick:function(event){
+			alert(this.message);
+		}
+	}
+
+
+
+	</script>
+</head>
+<body>
+<button id="btn">Click me!</button>
+<script>
+	
+	var btn=document.getElementById("btn");
+	console.log(btn);
+	//btn.addEventListener("click", hander.handleClick,false);
+	//此时由于没有绑上下文，this,message为btn的this.message
+	btn.addEventListener("click",hander.handleClick.bind(hander));
+
+	//javascript对每个函数都设置了bind函数，他参数包含了一个上下文，调用了apply来应用上下文
+	
+
+</script>
+</body>
+</html>

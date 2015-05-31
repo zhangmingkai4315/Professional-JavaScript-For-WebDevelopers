@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+	var EventUtil={
+    	getEvent:function(event){
+    		return event?event:window.event;
+    	},
+    	getTarget:function(event){
+    		return event.target||event.srcElement;
+    	},
+	 	addHandler:function(element,type,handler){
+	 		if(element.addEventListener){
+	 			element.addEventListener(type,handler,false);
+	 		}else if(element.attachEvent){
+	 			element.attachEvent("on"+type);
+	 		}else{
+	 			element["on"+type]=handler;
+	 		}
+	 	},
+	 	removeHandler:function(element,type,handler){
+	 		if(element.removeEventListener){
+	 			element.removeEventListener(type,handler,false);
+	 		}else if(element.detachEvent){
+	 			element.detachEvent("on"+type);
+	 		}else{
+	 			element["on"+type]=null;
+	 		}
+	 	},
+	 	preventDefault:function(event){
+			if(event.preventDefault){
+				event.preventDefault();
+			}else{
+				event.returnValue=false;   //returnValue代表了阻止默认行为
+			}
+		},
+
+		stopPropagation:function(event){
+			if(event.stopPropagation){
+				event.stopPropagation();
+			}else{
+				event.cancelBubble=true;   //cancelBubble 代表了阻止事件冒泡
+			}
+		},
+		//定义鼠标滚轮的事件 若是向前则返回120 向后返回-120 
+		getWheelDelta:function(event){
+			if(event.wheelDelta){
+				return event.wheelDelta;
+			}else{
+				return -event.detail*40;  //定义了Firefox的支持i
+			}
+		},
+		getCharCode:function(event){
+			console.log(event.charCode);
+			console.log(event.keyCode);
+
+			if(typeof event.charCode=="number"){
+				return event.charCode;
+			}else{
+				return event.keyCode;
+			}
+		}
+	 	
+	 };
+	 var DragDrop=function(){
+	 	var dragging=null;
+	 	diffX=0;
+	 	diffY=0;
+	 	function handleEvent(event){
+	 		event=EventUtil.getEvent(event);
+	 		var target=EventUtil.getTarget(event);
+	 		switch(event.type){
+	 			case "mousedown":
+
+	 				console.log("mousedown");
+	 				if(target.className.indexOf("dragable")>-1){
+	 					dragging=target;
+	 					diffX=event.clientX-target.offsetLeft;
+	 					diffY=event.clientY-target.offsetTop;
+
+	 				}
+	 				console.log(dragging);
+	 				break;
+	 			case "mousemove":
+	 				console.log("mousemove");
+	 				if(dragging!=null){
+	 					dragging.style.left=event.clientX-diffX+"px";
+	 					dragging.style.top=event.clientY-diffY+'px';
+	 				}
+	 				break;
+	 			case "mouseup":
+	 				console.log("mouseup");
+	 				dragging=null;
+	 				break;
+	 			default:
+	 				
+	 				break;
+	 		}
+	 	};
+	 	return {
+	 		enable:function(){
+	 			console.log("enabled!")
+	 			EventUtil.addHandler(document,"mousedown",handleEvent);
+	 			EventUtil.addHandler(document,"mousemove",handleEvent);
+	 			EventUtil.addHandler(document,"mouseup",handleEvent);
+	 		},
+	 		disable:function(){
+	 			console.log("disabled!")
+	 			EventUtil.removeHandler(document,"mousedown",handleEvent);
+	 			EventUtil.removeHandler(document,"mousemove",handleEvent);
+	 			EventUtil.removeHandler(document,"mouseup",handleEvent);
+	 		}
+	 	}
+	 };
+
+	 DragDrop().enable();
+	
+	 // EventUtil.addHandler(document,"mouseover",function(event){ 
+	 // 	var divExample=document.getElementById("divExample");
+	 // 	divExample.style.left=event.clientX+'px';
+	 // 	divExample.style.top=event.clientY+'px';
+	 // 	console.log(event);
+	 // });
+	 </script>
+</head>
+<body>
+<div class="dragable" style="position: absolute; height: 100px;width: 100px;background-color: #111">
+	
+</div>
+
+
+</body>
+</html>
