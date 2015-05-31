@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Example of exception</title>
+	<script type="text/javascript">
+	try{
+		window.SomeFunction();
+	}catch(error){
+		alert(error.message);
+	}finally{
+		console.log("Finally call");
+	}
+
+	try{
+		window.SomeFunction();
+	}catch(error){
+		if(error instanceof TypeError){
+			console.log("TypeError");
+		}else if(error instanceof ReferenceError){
+			console.log("ReferenceError");
+		}else{
+			console.log("Unknown")
+		}
+	}finally{
+		console.log("Finally call");
+	}
+//定义一个函数是否包含大于100的值
+	function process(values){
+		if(!(values instanceof Array)){
+			throw new Error("Argument must be an array");
+		}
+		values.sort();
+		for (var i=0;i<values.length;i++){
+			if(values[i]>100){
+				return values[i];
+			}
+		}
+		return -1;
+	}
+try{
+	process("Hello");
+}catch(error){
+	console.log(error.message);
+}
+
+// 如何将前端的错误日志输出到服务器端
+
+function logStream(sev,msg){
+	var img=new Image();
+	img.src="log.php?sev="+encodeURIComponent(sev)+"&msg="+encodeURIComponent(msg);
+}
+
+logStream("Nonfatal","Module init failed!");
+
+//在页面上直接显示错误信息
+
+function log(message){
+	var console=document.getElementById("console");
+	if(console===null){
+		console=document.createElement("div");
+		console.id="console";
+		console.background="#dedede";
+		console.style.border="1px solid silver";
+		console.style.padding="5px";
+		console.style.width="400px";
+		console.style.right="0px";
+		console.style.top="0px";
+		console.style.position="absolute";
+		document.body.appendChild(console);
+	}
+	console.innerHTML+="<p>"+message+"</p>";
+}
+
+
+
+log("Helle console");
+
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
