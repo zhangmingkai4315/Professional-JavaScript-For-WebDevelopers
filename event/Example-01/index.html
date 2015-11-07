@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+
+    <style media="screen">
+      .wall{
+        background-color: grey;
+        height: 300px
+      }
+      .colorBlock{
+        background-color:red;
+        height: 50px;
+        width: 50px;
+        display: inline-table;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wall" id="wall">
+      <a href="http://www.baidu.com"><div class="colorBlock" id="color1"></div></a>
+      <div class="colorBlock" id="color2"></div>
+      <div class="colorBlock" id="color3"></div>
+      <div class="colorBlock" id="color4"></div>
+      <div class="colorBlock" id="color5"></div>
+      <div class="colorBlock" id="color6"></div>
+    </div>
+
+    <script type="text/javascript">
+      // document.getElementById("color3").onclick=function (e) {
+      //   alert("ok");
+      // }
+      // if(window.addEventListener){
+      //   document.getElementById("color1").addEventListener("click",function (e) {
+      //    console.log(e.target+" Non ie");
+      //   },false);
+      // }else if(window.attachEvent){
+      //   document.getElementById('color1').attachEvent("onclick",function () {
+      //     console.log(e.target+" ie browser");
+      //   });
+      // }
+      document.getElementById("wall").addEventListener("click",function (e) {
+          console.log(e.toElement.id);
+
+      },false);
+      document.getElementById("color1").addEventListener("click",function (e) {
+          e.preventDefault();
+          console.log("click color1");
+            e.stopPropagation();
+      },false);
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+
+    <style media="screen">
+      .wall{
+        background-color: grey;
+        height: 300px
+      }
+      .colorBlock{
+        background-color:red;
+        height: 50px;
+        width: 50px;
+        display: inline-table;
+        margin: 20px;
+      }
+      .colorBlock.preview {
+        height: 100px;
+        width: 100px;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wall" id="wall">
+      <a href="http://www.baidu.com"><div class="colorBlock" id="color1"></div></a>
+      <div class="colorBlock" id="color2"></div>
+      <div class="colorBlock" id="color3"></div>
+      <div class="colorBlock" id="color4"></div>
+      <div class="colorBlock" id="color5"></div>
+      <div class="colorBlock" id="color6"></div>
+    </div>
+
+    <script type="text/javascript">
+
+      document.querySelector(".wall").addEventListener("click",function (e) {
+          e.preventDefault();
+          var howMany=this.querySelectorAll('.colorBlock').length;
+          if(howMany===0){
+            alert("NO!");
+          }else{
+            console.dir(e.target);
+            // console.log(e.toElement.id);
+            var removeTarget=e.target;
+            // console.log(removeTarget);
+            if(e.target.className==='colorBlock'){
+              removeTarget.parentNode.removeChild(removeTarget);
+            }
+          }
+      },false);
+
+      document.querySelector(".wall").addEventListener("mouseover",function (e) {
+          e.preventDefault();
+          var myElement=document.createElement('div');
+          myElement.className="preview";
+          e.target.parentNode.appentChild(myElement);
+      },false);
+
+    </script>
+
+  </body>
+</html>
