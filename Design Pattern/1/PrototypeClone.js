@@ -20,13 +20,13 @@ Object.create=Object.create||function (obj) {
 
 
 var dog3=Object.create(dog1);
-var cloneObj=function (obj) {
-  var Empty=function () {
-  };
-  Empty.prototype=obj;
-  return new Empty();
-};
-
-var dog4=cloneObj(dog1);
+// var cloneObj=function (obj) {
+//   var Empty=function () {
+//   };
+//   Empty.prototype=obj;
+//   return new Empty();
+// };
+//
+// var dog4=cloneObj(dog1);
 dog3.showInfo();
-dog4.showInfo();
+// dog4.showInfo();
